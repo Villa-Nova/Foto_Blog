@@ -12,11 +12,13 @@
 :root {
   font-size: 62.5%;
 
-  --color-base-white: #fff;
-  --color-base-gray-100: #f5f5f5;
-  --color-base-gray-300: #8d8d99;
-  --color-base-gray-500: #3d3d3d;
-  --color-base-gray-900: #202024;
+  --hue: 240;
+  
+  --color-base-white: hsl(0, 0%, 100%);
+  --color-base-gray-100: hsl(0, 0%, 96%);
+  --color-base-gray-300: hsl(var(--hue), 6%, 58%);
+  --color-base-gray-500: hsl(0, 0%, 24%);
+  --color-base-gray-900: hsl(var(--hue), 6%, 13%);
 
   font-family: 'Mulish', sans-serif;
 }
@@ -57,16 +59,27 @@ main {
 
 /* Header */
 
+header {
+  --moveY: -100%;
+  animation: move .8s ease-out;
+}
+
 header, 
 nav, 
 nav ul {
   display: flex;
   align-items: center;
   gap: 7.2rem;
+
+  font-weight: 700;
 }
 
 header form {
   flex: 1;
+}
+
+.camera:hover {
+  animation: blink .3s backwards;
 }
 
 nav ul {
@@ -96,6 +109,10 @@ ul li.active {
 
   font-size: 1.6rem;
   font-weight: 600;
+}
+
+.input-wrapper input:focus {
+  outline: 1px solid var(--color-base-gray-300);
 }
 
 .input-wrapper input::placeholder {
@@ -137,12 +154,17 @@ main h1 {
   background-color: var(--color-base-white);
   border-radius: .8rem;
   overflow: hidden;
+
+  /* Os valores dos outros cards foram definidos no html */
+  --delay: .4s;
+  animation: appear .4s var(--delay) backwards;
 }
 
 .card img {
   width: 100%;
   aspect-ratio: 16/9;
   object-fit: cover;
+  display: block;
 
   /* 
     ease-in: devagar nocomeço e rapido no final
@@ -184,4 +206,36 @@ footer {
   text-align: center;
   padding: 1.6rem;
   font-weight: 600;
+
+  /* Variavel p/ reaproveitar a mesma animação */
+  --moveY: 100%; 
+  animation: move .8s ease-out;
+}
+
+@keyframes move {
+  0% {
+    opacity: 0;
+    transform: translateY(var(--moveY));
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: .1;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
