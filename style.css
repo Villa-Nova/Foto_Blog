@@ -158,6 +158,7 @@ main h1 {
   /* Os valores dos outros cards foram definidos no html */
   --delay: .4s;
   animation: appear .4s var(--delay) backwards;
+  transition: all .4s ease-out;
 }
 
 .card img {
@@ -178,6 +179,11 @@ main h1 {
 .card:hover img {
   filter: grayscale(0%) contrast(101%) saturate(150%);
   transform: scale(1.1);
+}
+
+.container:has(.card:hover) .card:not(:hover) {
+  filter: grayscale(100%);
+  transform: scale(.95);
 }
 
 .details {
